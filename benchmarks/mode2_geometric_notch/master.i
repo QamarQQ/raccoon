@@ -12,7 +12,7 @@ dc = 0.6
 
 [Mesh]
   type = FileMesh
-  file = 'gold/geo.msh'
+  file = 'gold/triangles/geo.msh'
 []
 
 [MultiApps]

@@ -7,7 +7,7 @@
 registerMooseObject("raccoonApp", VariableFractureMaterial);
 
 InputParameters
-FractureMaterial::validParams()
+VariableFractureMaterial::validParams()
 {
   InputParameters params = ADMaterial::validParams();
   params.addClassDescription(

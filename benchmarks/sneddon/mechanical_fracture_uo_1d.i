@@ -129,14 +129,15 @@ dc = 1
   [./d]
     type = BrittleDamageIC
     variable = d
+    bandwidth_multiplier = 10
     d0 = 1.0
     l = ${l}
-    x1 = 0
-    y1 = 0
-    z1 = 0
-    x2 = 0
-    y2 = 0
-    z2 = 0
+    x1 = '0 1e-3'
+    y1 = '0 0'
+    z1 = '0 0'
+    x2 = '0 1e-3'
+    y2 = '0 0'
+    z2 = '0 0'
   [../]
 []
 
@@ -156,7 +157,7 @@ dc = 1
     displacements = 'disp_x'
   [../]
   [./stress]
-    type = SmallStrainDegradedElasticPK2Stress_StrainSpectral
+    type = SmallStrainDegradedElasticPK2Stress_NoSplit
     d = 'd'
     d_crit = ${dc}
   [../]
@@ -188,11 +189,12 @@ dc = 1
   solve_type = 'NEWTON'
   petsc_options_iname = '-pc_type -sub_pc_type -ksp_max_it -ksp_gmres_restart -sub_pc_factor_levels -snes_type'
   petsc_options_value = 'asm      ilu          200         200                0                     vinewtonrsls'
+  line_search = none
   dt = 1e-4
-  end_time = 2e-4
+  end_time = 1e-4
 
-  nl_abs_tol = 1e-06
-  nl_rel_tol = 1e-06
+  nl_abs_tol = 1e-09
+  nl_rel_tol = 1e-09
 
   automatic_scaling = true
   compute_scaling_once = false
@@ -216,10 +218,10 @@ dc = 1
 []
 
 [Outputs]
-  print_linear_residuals = true
+  print_linear_residuals = false
   [./exodus]
     type = Exodus
-    file_base = 'visualize'
+    file_base = '1d_nodec_fine'
   [../]
   [./console]
     type = Console

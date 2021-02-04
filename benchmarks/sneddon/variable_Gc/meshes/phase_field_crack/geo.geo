@@ -5,19 +5,19 @@ L = 4;
 c = 0.2;
 
 Point(1) = {-L/2, -L/2, 0, H};
-Point(2) = {-3*c, 0, 0, h};
+Point(2) = {-5*c, 0, 0, h};
 //Point(3) = {-c, -h/8, 0, h};
 Point(4) = {-L/2, L/2, 0, H};
 Point(5) = {L/2, L/2, 0, H};
-Point(6) = {3*c, 0, 0, h};
+Point(6) = {5*c, 0, 0, h};
 //Point(7) = {c, -h/8, 0, h};
 Point(8) = {L/2, -L/2, 0, H};
 
 //refinement region
-Point(15) = {-3*c, l, 0, h};
-Point(16) = {-3*c, -l, 0, h};
-Point(17) = {3*c, l, 0, h};
-Point(18) = {3*c, -l, 0, h};
+Point(15) = {-5*c, l, 0, h};
+Point(16) = {-5*c, -l, 0, h};
+Point(17) = {5*c, l, 0, h};
+Point(18) = {5*c, -l, 0, h};
 
 
 Line(1) = {1, 4};

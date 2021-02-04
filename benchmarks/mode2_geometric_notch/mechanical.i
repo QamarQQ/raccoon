@@ -34,13 +34,15 @@
 
 [Mesh]
   type = FileMesh
-  file = 'gold/geo.msh'
+  file = 'gold/triangles/geo.msh'
 []
 
 [Variables]
   [./disp_x]
   [../]
   [./disp_y]
+  [../]
+  [./disp_z]
   [../]
 []
 
@@ -62,7 +64,7 @@
 
 [AuxKernels]
   [./E_el]
-    type = MaterialRealAux
+    type = ADMaterialRealAux
     variable = 'E_el'
     property = 'E_el_active'
     execute_on = 'TIMESTEP_END'
@@ -74,14 +76,20 @@
     type = ADStressDivergenceTensors
     variable = 'disp_x'
     component = 0
-    displacements = 'disp_x disp_y'
+    displacements = 'disp_x disp_y disp_z'
     save_in = 'fx'
   [../]
   [./solid_y]
     type = ADStressDivergenceTensors
     variable = 'disp_y'
     component = 1
-    displacements = 'disp_x disp_y'
+    displacements = 'disp_x disp_y disp_z'
+  [../]
+  [./solid_z]
+    type = ADStressDivergenceTensors
+    variable = 'disp_z'
+    component = 2
+    displacements = 'disp_x disp_y disp_z'
   [../]
 []
 
@@ -104,17 +112,23 @@
     boundary = 'bottom'
     value = 0
   [../]
+  [./zfix]
+    type = DirichletBC
+    variable = 'disp_z'
+    boundary = 'top bottom left right'
+    value = 0
+  [../]
 []
 
 [Materials]
   [./elasticity_tensor]
-    type = ComputeIsotropicElasticityTensor
+    type = ADComputeIsotropicElasticityTensor
     youngs_modulus = ${E}
     poissons_ratio = ${nu}
   [../]
   [./strain]
     type = ADComputeSmallStrain
-    displacements = 'disp_x disp_y'
+    displacements = 'disp_x disp_y disp_z'
   [../]
   [./stress]
     type = SmallStrainDegradedElasticPK2Stress_StrainSpectral
@@ -173,7 +187,7 @@
   [../]
   [./exodus]
     type = Exodus
-    file_base = 'visualize'
+    file_base = 'visualize2'
   [../]
   [./console]
     type = Console

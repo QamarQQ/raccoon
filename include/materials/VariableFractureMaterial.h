@@ -7,14 +7,11 @@
 #include "Material.h"
 #include "Function.h"
 
-class VariableFractureMaterial;
-
-template <>
-InputParameters validParams<VariableFractureMaterial>();
-
 class VariableFractureMaterial : public Material
 {
 public:
+  static InputParameters validParams();
+
   VariableFractureMaterial(const InputParameters & parameters);
 
 protected:

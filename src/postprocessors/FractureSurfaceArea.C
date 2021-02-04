@@ -27,5 +27,8 @@ FractureSurfaceArea::FractureSurfaceArea(const InputParameters & parameters)
 Real
 FractureSurfaceArea::computeQpIntegral()
 {
-  return FractureEnergy::computeQpIntegral() / _Gc[_qp];
+  Real h = 0.0322;
+  Real ell = 0.15;
+  Real c0 = 2.667;
+  return FractureEnergy::computeQpIntegral() / _Gc[_qp] / (1 + h/ell/c0);
 }

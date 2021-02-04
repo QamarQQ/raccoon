@@ -1,8 +1,8 @@
-H = 0.3;
-h = 0.01;
+H = 0.05;
+h = 0.002;
 l = 1e-3;
 L = 4;
-c = 0.2;
+c = 0.2143;
 
 Point(1) = {-L/2, -L/2, 0, H};
 Point(2) = {-c, 0, 0, h};
@@ -12,15 +12,6 @@ Point(5) = {L/2, L/2, 0, H};
 Point(6) = {c, 0, 0, h};
 Point(7) = {0, l, 0, h};
 Point(8) = {L/2, -L/2, 0, H};
-
-Point(9) = {-L/4, 0, 0, h};
-Point(10) = {L/4, 0, 0, h};
-
-//circle points
-Point(11) = {-3*L/8, 0, 0, H};
-Point(12) = {-L/8, 0, 0, h};
-Point(13) = {3*L/8, 0, 0, H};
-Point(14) = {L/8, 0, 0, h};
 
 Line(1) = {1, 4};
 Line(2) = {4, 5};
@@ -36,18 +27,7 @@ Line(8) = {7, 2};
 Line Loop(1) = {1, 2, 3, 4};
 Line Loop(2) = {5, 6, 7, 8}; 
 
-
-Circle(11) = {11, 9, 12};
-Circle(12) = {12, 9, 11};
-
-Circle(13) = {13, 10, 14};
-Circle(14) = {14, 10, 13};
-
-Curve Loop(3) = {11, 12};
-Curve Loop(4) = {13, 14};
-
-
-Plane Surface(1) = {2,1,3,4};
+Plane Surface(1) = {2,1};
 //Line{5, 6, 7, 8} In Surface {1};
 //Line{6, 8} In Surface {1};
 //Line{9, 10} In Surface {1};

@@ -1,6 +1,6 @@
 [Mesh]
   type = FileMesh
-  file = 'gold/geo.msh'
+  file = 'gold/triangles/geo.msh'
 []
 
 [Variables]
@@ -24,11 +24,17 @@
 
 [Bounds]
   [./irreversibility]
-    type = Irreversibility
+    type = VariableOldValueBoundsAux
     variable = 'bounds_dummy'
     bounded_variable = 'd'
-    upper = 1
-    lower = 'd_ref'
+    bound_type = lower
+  [../]
+  [./upper]
+    type = ConstantBoundsAux
+    variable = 'bounds_dummy'
+    bounded_variable = 'd'
+    bound_type = upper
+    bound_value = 1
   [../]
 []
 
@@ -40,6 +46,10 @@
   [../]
   [./diff]
     type = ADPFFDiffusion
+    variable = 'd'
+  [../]
+  [./barrier]
+    type = ADPFFBarrier
     variable = 'd'
   [../]
 []

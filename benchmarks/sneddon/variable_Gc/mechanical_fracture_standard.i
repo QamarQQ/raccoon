@@ -7,7 +7,8 @@ nu = 0.2
 
 [Mesh]
   type = FileMesh
-  file = 'meshes/sharp_final_crack/geo.msh'
+  file = 'meshes/sharp_initial_crack/geo.msh'
+  construct_side_set_from_node_set = true
 []
 
 [Variables]
@@ -50,7 +51,7 @@ nu = 0.2
   # [../]
   [./Pressure]
     [./crack]
-      boundary = 'crack_top crack_bottom'
+      boundary = 'crack'
       factor = 1e-3
       displacements = 'disp_x disp_y'
     [../]
@@ -101,7 +102,7 @@ nu = 0.2
   print_linear_residuals = false
   [./exodus]
     type = Exodus
-    file_base = 'sharp_final'
+    file_base = 'sharp_initial'
   [../]
   [./console]
     type = Console

@@ -136,10 +136,10 @@ dc = 1
     l = ${l}
     bandwidth_multiplier = 100
     x1 = '-0.2 -0.2'
-    y1 = '0 4e-3'
+    y1 = '0 3e-3'
     z1 = '0 0'
     x2 = '0.2 0.2'
-    y2 = '0 4e-3'
+    y2 = '0 3e-3'
     z2 = '0 0'
   [../]
 []
@@ -160,7 +160,7 @@ dc = 1
     displacements = 'disp_x disp_y'
   [../]
   [./stress]
-    type = SmallStrainDegradedElasticPK2Stress_StrainSpectral
+    type = SmallStrainDegradedElasticPK2Stress_NoSplit
     d = 'd'
     d_crit = ${dc}
     degradation_uo = 'g'
@@ -195,8 +195,8 @@ dc = 1
   solve_type = 'NEWTON'
   petsc_options_iname = '-pc_type -sub_pc_type -ksp_max_it -ksp_gmres_restart -sub_pc_factor_levels -snes_type'
   petsc_options_value = 'asm      ilu          200         200                0                     vinewtonrsls'
-  dt = 1e-4
-  end_time = 1.65e-2
+  dt = 1e-3
+  end_time = 1e-3
 
   nl_abs_tol = 1e-12
   nl_rel_tol = 1e-12
@@ -205,7 +205,7 @@ dc = 1
   automatic_scaling = true
   compute_scaling_once = false
 
-  fp_max_its = 0
+  fp_max_its = 20
   fp_tol = 1e-06
   accept_on_max_fp_iteration = true
 []
@@ -214,7 +214,7 @@ dc = 1
   print_linear_residuals = false
   [./exodus]
     type = Exodus
-    file_base = 'pf_crack'
+    file_base = 'pf_crack_comparison_spectral_finer'
   [../]
   [./console]
     type = Console
